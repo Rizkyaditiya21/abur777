@@ -3,49 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vegas Pro Slot</title>
+<title>Royal Vegas International</title>
 
 <style>
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:'Segoe UI', sans-serif;
+  font-family:'Segoe UI',sans-serif;
 }
 
 body{
-  background: radial-gradient(circle at top, #1a1a1a, #000);
+  background: radial-gradient(circle at top,#2b0a3d,#000);
   color:white;
+  overflow:hidden;
+}
+
+/* HEADER */
+.header{
+  position:absolute;
+  top:0;
+  width:100%;
   display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
+  justify-content:space-between;
+  padding:15px 25px;
+  background:rgba(0,0,0,0.6);
+  backdrop-filter:blur(10px);
 }
 
-.container{
-  width:95%;
-  max-width:520px;
-  padding:25px;
-  border-radius:20px;
-  background:rgba(20,20,20,0.9);
-  backdrop-filter:blur(15px);
-  box-shadow:0 0 40px rgba(255,215,0,0.3);
-  text-align:center;
-}
-
-.title{
-  font-size:28px;
-  font-weight:bold;
+.logo{
+  font-size:22px;
   color:gold;
+  font-weight:bold;
   text-shadow:0 0 10px gold;
-  margin-bottom:15px;
 }
 
 .panel{
   display:flex;
-  justify-content:space-between;
-  margin-bottom:15px;
-  font-size:14px;
+  gap:15px;
 }
 
 .badge{
@@ -53,30 +48,39 @@ body{
   padding:8px 12px;
   border-radius:10px;
   border:1px solid gold;
+  font-size:14px;
+}
+
+/* GAME AREA */
+.game{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
 }
 
 .slot{
   display:flex;
-  justify-content:center;
-  gap:12px;
+  gap:15px;
   margin:20px 0;
 }
 
 .reel{
-  width:65px;
-  height:70px;
-  background:#111;
-  border-radius:12px;
+  width:80px;
+  height:110px;
+  background:linear-gradient(#111,#000);
+  border-radius:15px;
   border:2px solid gold;
-  font-size:38px;
   display:flex;
   justify-content:center;
   align-items:center;
-  transition:0.3s;
+  font-size:50px;
+  box-shadow:0 0 15px rgba(255,215,0,0.4);
 }
 
 .spin{
-  animation:spin 0.15s linear infinite;
+  animation:spin 0.12s linear infinite;
 }
 
 @keyframes spin{
@@ -84,70 +88,81 @@ body{
   to{transform:rotateX(360deg);}
 }
 
+/* CONTROLS */
 .controls{
   margin-top:10px;
+  text-align:center;
 }
 
 input{
-  width:90px;
-  padding:6px;
+  padding:8px;
+  width:100px;
   border-radius:8px;
   border:none;
   text-align:center;
 }
 
-button{
-  margin-top:10px;
-  padding:12px 30px;
-  background:linear-gradient(45deg,gold,orange);
-  border:none;
-  border-radius:12px;
+.spin-btn{
+  margin-top:15px;
+  padding:15px 50px;
+  font-size:18px;
   font-weight:bold;
+  border:none;
+  border-radius:50px;
+  background:linear-gradient(45deg,gold,orange);
   cursor:pointer;
   transition:0.3s;
 }
 
-button:hover{
-  transform:scale(1.05);
-  box-shadow:0 0 15px gold;
+.spin-btn:hover{
+  transform:scale(1.08);
+  box-shadow:0 0 20px gold;
 }
 
 .result{
   margin-top:15px;
   font-weight:bold;
-  min-height:20px;
+  min-height:24px;
 }
 
 .win{
   color:#00ffae;
-  text-shadow:0 0 8px #00ffae;
+  text-shadow:0 0 12px #00ffae;
 }
 
+.jackpot{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  background:gold;
+  color:black;
+  text-align:center;
+  padding:8px;
+  font-weight:bold;
+  animation:blink 1s infinite alternate;
+}
+
+@keyframes blink{
+  from{opacity:1;}
+  to{opacity:0.6;}
+}
+
+@media(max-width:600px){
+  .reel{width:60px;height:90px;font-size:40px;}
+}
 </style>
 </head>
 <body>
 
-<div class="container">
-
-<div class="title">🎰 VEGAS PRO SLOT</div>
-
-<div id="loginArea">
-  <input type="text" id="username" placeholder="Masukkan Username">
-  <br>
-  <button onclick="login()">LOGIN</button>
+<div class="header">
+  <div class="logo">🎰 ROYAL VEGAS</div>
+  <div class="panel">
+    <div class="badge">Saldo: <span id="balance">5000</span></div>
+    <div class="badge">Level: <span id="level">1</span></div>
+  </div>
 </div>
 
-<div id="gameArea" style="display:none;">
-
-  <div class="panel">
-    <div class="badge">User: <span id="userDisplay"></span></div>
-    <div class="badge">Saldo: <span id="balance">1000</span></div>
-  </div>
-
-  <div class="panel">
-    <div class="badge">Level: <span id="level">1</span></div>
-    <div class="badge">Bonus: <span id="bonus">0</span></div>
-  </div>
+<div class="game">
 
   <div class="slot">
     <div class="reel" id="r1">🍒</div>
@@ -158,46 +173,27 @@ button:hover{
   </div>
 
   <div class="controls">
-    Bet: <input type="number" id="bet" value="100" min="10">
+    Bet: <input type="number" id="bet" value="200" min="50">
     <br>
-    <button onclick="spin()">SPIN</button>
+    <button class="spin-btn" onclick="spin()">SPIN</button>
   </div>
 
   <div class="result" id="result"></div>
 
 </div>
+
+<div class="jackpot">
+  💰 GLOBAL JACKPOT: <span id="jackpot">100000</span>
 </div>
 
 <script>
-let balance=1000, level=1, bonus=0, winCount=0;
+let balance=5000, level=1, jackpot=100000;
 let symbols=["🍒","💎","🔥","👑","🍀","7️⃣"];
-
-function login(){
-  let user=document.getElementById("username").value.trim();
-  if(user.length<3){alert("Minimal 3 huruf");return;}
-  localStorage.setItem("slotUser",user);
-  startGame(user);
-}
-
-function startGame(u){
-  document.getElementById("loginArea").style.display="none";
-  document.getElementById("gameArea").style.display="block";
-  document.getElementById("userDisplay").innerText=u;
-}
-
-window.onload=function(){
-  let u=localStorage.getItem("slotUser");
-  if(u) startGame(u);
-}
 
 function spin(){
   let bet=parseInt(document.getElementById("bet").value);
-  if(isNaN(bet)||bet<10){alert("Bet minimal 10");return;}
-
-  if(bonus>0) bonus--;
-  else if(balance<bet){alert("Saldo habis");return;}
-  else balance-=bet;
-
+  if(balance<bet||bet<50){alert("Saldo kurang atau bet terlalu kecil");return;}
+  balance-=bet;
   updateUI();
 
   let reels=["r1","r2","r3","r4","r5"];
@@ -215,37 +211,34 @@ function spin(){
   },1000);
 }
 
-function checkWin(results,bet){
+function checkWin(res,bet){
   let counts={},maxv=0;
-  results.forEach(x=>{
+  res.forEach(x=>{
     counts[x]=(counts[x]||0)+1;
     maxv=Math.max(maxv,counts[x]);
   });
 
-  let resultBox=document.getElementById("result");
-
   if(maxv>=3){
-    let won=bet*maxv;
-    balance+=won;
-    winCount++;
-    resultBox.innerHTML="<span class='win'>🔥 MENANG x"+maxv+" +"+won+"</span>";
-
-    if(winCount%5===0){
-      level++;
-      bonus+=2;
-      alert("LEVEL UP! Bonus 2 Spin 🎁");
+    let win=bet*maxv;
+    balance+=win;
+    document.getElementById("result").innerHTML="<span class='win'>🔥 WIN x"+maxv+" +"+win+"</span>";
+    if(maxv===5){
+      balance+=jackpot;
+      document.getElementById("result").innerHTML="<span class='win'>💎 MEGA JACKPOT +"+jackpot+"</span>";
+      jackpot=100000;
     }
   }else{
-    resultBox.innerText="Coba lagi!";
+    document.getElementById("result").innerText="Try Again!";
   }
 
+  jackpot+=50;
   updateUI();
 }
 
 function updateUI(){
   document.getElementById("balance").innerText=balance;
   document.getElementById("level").innerText=level;
-  document.getElementById("bonus").innerText=bonus;
+  document.getElementById("jackpot").innerText=jackpot;
 }
 </script>
 
