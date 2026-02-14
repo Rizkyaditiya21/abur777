@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Slot Sultan Vegas</title>
+<title>Slot Vegas Ultimate</title>
 
 <style>
 body{
@@ -44,11 +44,10 @@ body{
     border-radius:10px;
     width:60px;
     border:2px solid gold;
-    transition:0.2s;
 }
 
-.spin-anim{
-    animation: spin 0.1s linear infinite;
+.spin{
+    animation:spin 0.1s linear infinite;
 }
 
 @keyframes spin{
@@ -75,16 +74,13 @@ input{
     box-shadow:0 0 30px #00ff99;
 }
 
-.info{
-    margin-top:10px;
-}
-
 </style>
 </head>
 <body>
 
 <div class="container">
 
+<!-- LOGIN AREA -->
 <div id="loginArea">
     <h1 class="neon">🎰 SLOT VEGAS</h1>
     <input type="text" id="username" placeholder="Masukkan Username">
@@ -92,6 +88,83 @@ input{
     <button onclick="login()">LOGIN</button>
 </div>
 
+<!-- GAME AREA -->
 <div id="gameArea" style="display:none;">
+    <h2 class="neon">🎰 VEGAS JACKPOT</h2>
+    <p>User: <span id="userDisplay"></span></p>
+    <p>Saldo: <span id="balance">1000</span></p>
+    <p>Level: <span id="level">1</span></p>
+    <p>Bonus Spin: <span id="bonus">0</span></p>
 
-    <h2 class="neon">🎰 VEGAS JACK
+    Bet: <input type="number" id="bet" value="100" min="10">
+
+    <div class="slot">
+        <div class="reel" id="r1">🍒</div>
+        <div class="reel" id="r2">💎</div>
+        <div class="reel" id="r3">👑</div>
+        <div class="reel" id="r4">🔥</div>
+        <div class="reel" id="r5">7️⃣</div>
+    </div>
+
+    <button onclick="spin()">SPIN</button>
+    <p id="result"></p>
+</div>
+
+</div>
+
+<script>
+let balance = 1000;
+let level = 1;
+let winCount = 0;
+let bonusSpin = 0;
+
+const symbols = ["🍒","💎","🔥","👑","🍀","7️⃣"];
+
+function login(){
+    let user = document.getElementById("username").value.trim();
+    if(user.length < 3){
+        alert("Username minimal 3 huruf!");
+        return;
+    }
+
+    localStorage.setItem("slotUser", user);
+    startGame(user);
+}
+
+function startGame(user){
+    document.getElementById("loginArea").style.display="none";
+    document.getElementById("gameArea").style.display="block";
+    document.getElementById("userDisplay").innerText=user;
+}
+
+window.onload = function(){
+    let savedUser = localStorage.getItem("slotUser");
+    if(savedUser){
+        startGame(savedUser);
+    }
+}
+
+function spin(){
+
+    let bet = parseInt(document.getElementById("bet").value);
+    if(isNaN(bet) || bet < 10){
+        alert("Bet minimal 10!");
+        return;
+    }
+
+    if(bonusSpin > 0){
+        bonusSpin--;
+    }else{
+        if(balance < bet){
+            alert("Saldo habis!");
+            return;
+        }
+        balance -= bet;
+    }
+
+    updateUI();
+
+    let reels = ["r1","r2","r3","r4","r5"];
+
+    reels.forEach(id=>{
+        document.getElementById(id).classList.a
