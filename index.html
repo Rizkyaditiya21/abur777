@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Slot Sultan Ultimate</title>
+<title>Slot Sultan Vegas</title>
 
 <style>
 body{
     margin:0;
-    background:radial-gradient(circle,#000,#111);
-    font-family:Arial;
+    background:black;
+    font-family:Arial, sans-serif;
     color:white;
     display:flex;
     justify-content:center;
@@ -18,31 +18,31 @@ body{
 }
 
 .container{
+    width:100%;
+    max-width:500px;
+    padding:20px;
     text-align:center;
-    background:#111;
-    padding:30px;
-    border-radius:20px;
-    box-shadow:0 0 40px gold;
-    width:380px;
 }
 
-h1{
+.neon{
+    font-size:28px;
     color:gold;
+    text-shadow:0 0 10px gold, 0 0 20px orange;
 }
 
 .slot{
     display:flex;
     justify-content:center;
-    gap:15px;
+    gap:10px;
     margin:20px 0;
 }
 
 .reel{
-    font-size:50px;
-    background:black;
-    padding:20px;
+    font-size:40px;
+    background:#111;
+    padding:15px;
     border-radius:10px;
-    width:70px;
+    width:60px;
     border:2px solid gold;
     transition:0.2s;
 }
@@ -52,38 +52,46 @@ h1{
 }
 
 @keyframes spin{
-    0%{transform:rotateX(0deg);}
-    100%{transform:rotateX(360deg);}
+    from{transform:rotateX(0deg);}
+    to{transform:rotateX(360deg);}
 }
 
 button{
+    padding:10px 20px;
     background:gold;
     border:none;
-    padding:10px 20px;
     font-weight:bold;
     border-radius:10px;
     cursor:pointer;
-}
-
-button:hover{
-    background:white;
+    margin-top:10px;
 }
 
 input{
-    width:80px;
+    padding:5px;
     text-align:center;
 }
 
 .win-glow{
-    box-shadow:0 0 25px #00ff99;
+    box-shadow:0 0 30px #00ff99;
 }
 
-.leaderboard{
-    margin-top:15px;
-    font-size:14px;
+.info{
+    margin-top:10px;
 }
+
 </style>
 </head>
 <body>
 
-<div class="container"
+<div class="container">
+
+<div id="loginArea">
+    <h1 class="neon">🎰 SLOT VEGAS</h1>
+    <input type="text" id="username" placeholder="Masukkan Username">
+    <br><br>
+    <button onclick="login()">LOGIN</button>
+</div>
+
+<div id="gameArea" style="display:none;">
+
+    <h2 class="neon">🎰 VEGAS JACK
