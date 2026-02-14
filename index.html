@@ -1,170 +1,116 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Slot Vegas Ultimate</title>
-
-<style>
-body{
-    margin:0;
-    background:black;
-    font-family:Arial, sans-serif;
-    color:white;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-}
-
-.container{
-    width:100%;
-    max-width:500px;
-    padding:20px;
-    text-align:center;
-}
-
-.neon{
-    font-size:28px;
-    color:gold;
-    text-shadow:0 0 10px gold, 0 0 20px orange;
-}
-
-.slot{
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    margin:20px 0;
-}
-
-.reel{
-    font-size:40px;
-    background:#111;
-    padding:15px;
-    border-radius:10px;
-    width:60px;
-    border:2px solid gold;
-}
-
-.spin{
-    animation:spin 0.1s linear infinite;
-}
-
-@keyframes spin{
-    from{transform:rotateX(0deg);}
-    to{transform:rotateX(360deg);}
-}
-
-button{
-    padding:10px 20px;
-    background:gold;
-    border:none;
-    font-weight:bold;
-    border-radius:10px;
-    cursor:pointer;
-    margin-top:10px;
-}
-
-input{
-    padding:5px;
-    text-align:center;
-}
-
-.win-glow{
-    box-shadow:0 0 30px #00ff99;
-}
-
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>SLOT VEGAS</title>
+  <style>
+    body{
+      margin:0;
+      background:black;
+      color:white;
+      font-family:Arial,sans-serif;
+      text-align:center;
+      padding-top:80px;
+    }
+    input,button{
+      padding:12px;
+      font-size:16px;
+      border-radius:8px;
+      margin:8px;
+    }
+    button{
+      background:gold;
+      border:none;
+      cursor:pointer;
+    }
+    .slot{display:flex;justify-content:center;gap:10px;margin:15px 0;}
+    .reel{width:60px;font-size:40px;background:#111;border:2px solid gold;padding:10px;border-radius:10px;}
+  </style>
 </head>
 <body>
 
-<div class="container">
+<h1>🎰 SLOT VEGAS</h1>
 
-<!-- LOGIN AREA -->
 <div id="loginArea">
-    <h1 class="neon">🎰 SLOT VEGAS</h1>
-    <input type="text" id="username" placeholder="Masukkan Username">
-    <br><br>
-    <button onclick="login()">LOGIN</button>
+  <input type="text" id="username" placeholder="Masukkan Username">
+  <button onclick="login()">LOGIN</button>
 </div>
 
-<!-- GAME AREA -->
 <div id="gameArea" style="display:none;">
-    <h2 class="neon">🎰 VEGAS JACKPOT</h2>
-    <p>User: <span id="userDisplay"></span></p>
-    <p>Saldo: <span id="balance">1000</span></p>
-    <p>Level: <span id="level">1</span></p>
-    <p>Bonus Spin: <span id="bonus">0</span></p>
+  <p>User: <span id="userDisplay"></span></p>
+  <p>Saldo: <span id="balance">1000</span></p>
+  <p>Level: <span id="level">1</span></p>
+  <p>Bonus: <span id="bonus">0</span></p>
 
-    Bet: <input type="number" id="bet" value="100" min="10">
+  Bet: <input type="number" id="bet" value="100" min="10">
 
-    <div class="slot">
-        <div class="reel" id="r1">🍒</div>
-        <div class="reel" id="r2">💎</div>
-        <div class="reel" id="r3">👑</div>
-        <div class="reel" id="r4">🔥</div>
-        <div class="reel" id="r5">7️⃣</div>
-    </div>
+  <div class="slot">
+    <div class="reel" id="r1">🍒</div>
+    <div class="reel" id="r2">💎</div>
+    <div class="reel" id="r3">🔥</div>
+    <div class="reel" id="r4">👑</div>
+    <div class="reel" id="r5">🍀</div>
+  </div>
 
-    <button onclick="spin()">SPIN</button>
-    <p id="result"></p>
-</div>
-
+  <button onclick="spin()">SPIN</button>
+  <p id="result"></p>
 </div>
 
 <script>
-let balance = 1000;
-let level = 1;
-let winCount = 0;
-let bonusSpin = 0;
-
-const symbols = ["🍒","💎","🔥","👑","🍀","7️⃣"];
+let balance = 1000, level=1, bonus=0, winCount=0;
+let symbols=["🍒","💎","🔥","👑","🍀","7️⃣"];
 
 function login(){
-    let user = document.getElementById("username").value.trim();
-    if(user.length < 3){
-        alert("Username minimal 3 huruf!");
-        return;
-    }
-
-    localStorage.setItem("slotUser", user);
-    startGame(user);
+  let user=document.getElementById("username").value.trim();
+  if(user.length<3){alert("Username minimal 3 huruf!");return;}
+  localStorage.setItem("slotUser",user);
+  startGame(user);
 }
 
-function startGame(user){
-    document.getElementById("loginArea").style.display="none";
-    document.getElementById("gameArea").style.display="block";
-    document.getElementById("userDisplay").innerText=user;
+function startGame(u){
+  document.getElementById("loginArea").style.display="none";
+  document.getElementById("gameArea").style.display="block";
+  document.getElementById("userDisplay").innerText=u;
 }
 
-window.onload = function(){
-    let savedUser = localStorage.getItem("slotUser");
-    if(savedUser){
-        startGame(savedUser);
-    }
+window.onload=function(){
+  let u=localStorage.getItem("slotUser");
+  if(u) startGame(u);
 }
 
 function spin(){
+  let bet=parseInt(document.getElementById("bet").value);
+  if(isNaN(bet)||bet<10){alert("Bet minimal 10!");return;}
 
-    let bet = parseInt(document.getElementById("bet").value);
-    if(isNaN(bet) || bet < 10){
-        alert("Bet minimal 10!");
-        return;
-    }
+  if(bonus>0) bonus--;
+  else if(balance<bet){alert("Saldo habis!");return;}
+  else balance-=bet;
 
-    if(bonusSpin > 0){
-        bonusSpin--;
-    }else{
-        if(balance < bet){
-            alert("Saldo habis!");
-            return;
-        }
-        balance -= bet;
-    }
+  document.getElementById("balance").innerText=balance;
 
-    updateUI();
+  let res=[];
+  for(let i=1;i<=5;i++){
+    let s=symbols[Math.floor(Math.random()*symbols.length)];
+    document.getElementById("r"+i).innerText=s;
+    res.push(s);
+  }
 
-    let reels = ["r1","r2","r3","r4","r5"];
+  let counts={},maxv=0;
+  res.forEach(x=>{counts[x]=(counts[x]||0)+1;maxv=Math.max(maxv,counts[x]);});
+  
+  if(maxv>=3){
+    let won=bet*maxv;
+    balance+=won;winCount++;
+    document.getElementById("result").innerText="Menang x"+maxv+" +"+won;
+    if(winCount%5==0){level++;bonus+=2;alert("LEVEL UP! Bonus 2 spin 🎁");}
+  } else document.getElementById("result").innerText="Coba lagi!";
 
-    reels.forEach(id=>{
-        document.getElementById(id).classList.a
+  document.getElementById("balance").innerText=balance;
+  document.getElementById("level").innerText=level;
+  document.getElementById("bonus").innerText=bonus;
+}
+</script>
+
+</body>
+</html>
