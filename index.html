@@ -3,12 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Demo Slot Sultan</title>
+<title>Slot Sultan Ultimate</title>
+
 <style>
 body{
     margin:0;
-    background:linear-gradient(135deg,#000,#111);
-    font-family:Arial, sans-serif;
+    background:radial-gradient(circle,#000,#111);
+    font-family:Arial;
     color:white;
     display:flex;
     justify-content:center;
@@ -22,115 +23,67 @@ body{
     padding:30px;
     border-radius:20px;
     box-shadow:0 0 40px gold;
-    width:350px;
+    width:380px;
 }
 
 h1{
     color:gold;
-    margin-bottom:10px;
 }
 
 .slot{
     display:flex;
     justify-content:center;
-    margin:20px 0;
-    font-size:50px;
     gap:15px;
+    margin:20px 0;
 }
 
 .reel{
+    font-size:50px;
     background:black;
     padding:20px;
     border-radius:10px;
     width:70px;
     border:2px solid gold;
+    transition:0.2s;
+}
+
+.spin-anim{
+    animation: spin 0.1s linear infinite;
+}
+
+@keyframes spin{
+    0%{transform:rotateX(0deg);}
+    100%{transform:rotateX(360deg);}
 }
 
 button{
     background:gold;
     border:none;
-    padding:12px 25px;
+    padding:10px 20px;
     font-weight:bold;
-    font-size:16px;
     border-radius:10px;
     cursor:pointer;
-    transition:0.3s;
 }
 
 button:hover{
     background:white;
 }
 
-.info{
+input{
+    width:80px;
+    text-align:center;
+}
+
+.win-glow{
+    box-shadow:0 0 25px #00ff99;
+}
+
+.leaderboard{
     margin-top:15px;
-}
-
-.win{
-    color:#00ff99;
-    font-weight:bold;
-}
-
-.lose{
-    color:#ff4444;
-    font-weight:bold;
+    font-size:14px;
 }
 </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>🎰 SLOT SULTAN DEMO</h1>
-    <p>Saldo: <span id="balance">1000</span></p>
-    <p>Bet: 100</p>
-
-    <div class="slot">
-        <div class="reel" id="r1">🍒</div>
-        <div class="reel" id="r2">💎</div>
-        <div class="reel" id="r3">👑</div>
-    </div>
-
-    <button onclick="spin()">SPIN</button>
-
-    <div class="info" id="result"></div>
-</div>
-
-<script>
-let balance = 1000;
-let bet = 100;
-
-const symbols = ["🍒","💎","🔥","👑","🍀","7️⃣"];
-
-function spin(){
-    if(balance < bet){
-        document.getElementById("result").innerHTML = "<span class='lose'>Saldo habis!</span>";
-        return;
-    }
-
-    balance -= bet;
-
-    let r1 = symbols[Math.floor(Math.random()*symbols.length)];
-    let r2 = symbols[Math.floor(Math.random()*symbols.length)];
-    let r3 = symbols[Math.floor(Math.random()*symbols.length)];
-
-    document.getElementById("r1").innerText = r1;
-    document.getElementById("r2").innerText = r2;
-    document.getElementById("r3").innerText = r3;
-
-    if(r1 === r2 && r2 === r3){
-        let winAmount = bet * 5;
-        balance += winAmount;
-        document.getElementById("result").innerHTML = "<span class='win'>JACKPOT! +" + winAmount + "</span>";
-    }else if(r1 === r2 || r2 === r3 || r1 === r3){
-        let winAmount = bet * 2;
-        balance += winAmount;
-        document.getElementById("result").innerHTML = "<span class='win'>Menang! +" + winAmount + "</span>";
-    }else{
-        document.getElementById("result").innerHTML = "<span class='lose'>Coba lagi!</span>";
-    }
-
-    document.getElementById("balance").innerText = balance;
-}
-</script>
-
-</body>
-</html>
+<div class="container"
