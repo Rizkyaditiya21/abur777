@@ -1,244 +1,211 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Royal Vegas International</title>
+<title>ABUR777 Mega Spin</title>
 
 <style>
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Segoe UI',sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family: 'Trebuchet MS', sans-serif;
 }
 
 body{
-  background: radial-gradient(circle at top,#2b0a3d,#000);
-  color:white;
-  overflow:hidden;
+background: radial-gradient(circle at center,#1a0033,#000);
+color:white;
+text-align:center;
+height:100vh;
+overflow:hidden;
 }
 
 /* HEADER */
 .header{
-  position:absolute;
-  top:0;
-  width:100%;
-  display:flex;
-  justify-content:space-between;
-  padding:15px 25px;
-  background:rgba(0,0,0,0.6);
-  backdrop-filter:blur(10px);
+padding:15px;
+font-size:22px;
+font-weight:bold;
+color:#ffcc00;
+text-shadow:0 0 20px #ffcc00;
+letter-spacing:2px;
 }
 
-.logo{
-  font-size:22px;
-  color:gold;
-  font-weight:bold;
-  text-shadow:0 0 10px gold;
+/* SLOT FRAME */
+.frame{
+margin:10px auto;
+width:95%;
+max-width:450px;
+padding:20px;
+border-radius:20px;
+background:linear-gradient(145deg,#2d004d,#120022);
+box-shadow:0 0 30px #ff00ff inset, 0 0 40px #ff00ff;
 }
 
-.panel{
-  display:flex;
-  gap:15px;
-}
-
-.badge{
-  background:#111;
-  padding:8px 12px;
-  border-radius:10px;
-  border:1px solid gold;
-  font-size:14px;
-}
-
-/* GAME AREA */
-.game{
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-}
-
-.slot{
-  display:flex;
-  gap:15px;
-  margin:20px 0;
+/* REELS */
+.slot-container{
+display:flex;
+justify-content:center;
+gap:8px;
+margin:20px 0;
 }
 
 .reel{
-  width:80px;
-  height:110px;
-  background:linear-gradient(#111,#000);
-  border-radius:15px;
-  border:2px solid gold;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:50px;
-  box-shadow:0 0 15px rgba(255,215,0,0.4);
+width:60px;
+height:90px;
+background:#000;
+border-radius:12px;
+border:2px solid #ffcc00;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:38px;
+box-shadow:0 0 15px #ffcc00 inset;
+transition:transform 0.1s;
 }
 
-.spin{
-  animation:spin 0.12s linear infinite;
+/* SPIN ANIMATION */
+.spinning{
+animation: spinAnim 0.1s linear infinite;
 }
 
-@keyframes spin{
-  from{transform:rotateX(0deg);}
-  to{transform:rotateX(360deg);}
+@keyframes spinAnim{
+0%{transform:translateY(-5px);}
+50%{transform:translateY(5px);}
+100%{transform:translateY(-5px);}
 }
 
 /* CONTROLS */
 .controls{
-  margin-top:10px;
-  text-align:center;
+margin-top:10px;
 }
 
 input{
-  padding:8px;
-  width:100px;
-  border-radius:8px;
-  border:none;
-  text-align:center;
+width:80px;
+padding:6px;
+border-radius:8px;
+border:none;
+text-align:center;
+font-weight:bold;
 }
 
-.spin-btn{
-  margin-top:15px;
-  padding:15px 50px;
-  font-size:18px;
-  font-weight:bold;
-  border:none;
-  border-radius:50px;
-  background:linear-gradient(45deg,gold,orange);
-  cursor:pointer;
-  transition:0.3s;
+button{
+margin-top:10px;
+padding:12px 30px;
+border:none;
+border-radius:12px;
+font-size:16px;
+font-weight:bold;
+background:linear-gradient(45deg,#ffcc00,#ff6600);
+color:black;
+box-shadow:0 0 20px #ffcc00;
 }
 
-.spin-btn:hover{
-  transform:scale(1.08);
-  box-shadow:0 0 20px gold;
+button:active{
+transform:scale(0.95);
 }
 
-.result{
-  margin-top:15px;
-  font-weight:bold;
-  min-height:24px;
+.balance{
+margin-top:10px;
 }
 
 .win{
-  color:#00ffae;
-  text-shadow:0 0 12px #00ffae;
+color:#00ffcc;
+text-shadow:0 0 20px #00ffcc;
+animation: glow 1s infinite alternate;
 }
 
-.jackpot{
-  position:absolute;
-  bottom:0;
-  width:100%;
-  background:gold;
-  color:black;
-  text-align:center;
-  padding:8px;
-  font-weight:bold;
-  animation:blink 1s infinite alternate;
+@keyframes glow{
+from{text-shadow:0 0 10px #00ffcc;}
+to{text-shadow:0 0 25px #00ffcc;}
 }
 
-@keyframes blink{
-  from{opacity:1;}
-  to{opacity:0.6;}
+@media(max-width:480px){
+.reel{
+width:55px;
+height:80px;
+font-size:34px;
 }
-
-@media(max-width:600px){
-  .reel{width:60px;height:90px;font-size:40px;}
 }
 </style>
 </head>
+
 <body>
 
-<div class="header">
-  <div class="logo">🎰 ROYAL VEGAS</div>
-  <div class="panel">
-    <div class="badge">Saldo: <span id="balance">5000</span></div>
-    <div class="badge">Level: <span id="level">1</span></div>
-  </div>
+<div class="header">🎰 ABUR777 MEGA SPIN</div>
+
+<div class="frame">
+
+<div class="balance">
+Balance: $<span id="balance">1000</span><br>
+Bet: <input type="number" id="bet" value="50" min="10">
 </div>
 
-<div class="game">
-
-  <div class="slot">
-    <div class="reel" id="r1">🍒</div>
-    <div class="reel" id="r2">💎</div>
-    <div class="reel" id="r3">🔥</div>
-    <div class="reel" id="r4">👑</div>
-    <div class="reel" id="r5">7️⃣</div>
-  </div>
-
-  <div class="controls">
-    Bet: <input type="number" id="bet" value="200" min="50">
-    <br>
-    <button class="spin-btn" onclick="spin()">SPIN</button>
-  </div>
-
-  <div class="result" id="result"></div>
-
+<div class="slot-container">
+<div class="reel" id="r1">❓</div>
+<div class="reel" id="r2">❓</div>
+<div class="reel" id="r3">❓</div>
+<div class="reel" id="r4">❓</div>
+<div class="reel" id="r5">❓</div>
 </div>
 
-<div class="jackpot">
-  💰 GLOBAL JACKPOT: <span id="jackpot">100000</span>
+<div class="controls">
+<button onclick="spin()">SPIN</button>
+</div>
+
+<h2 id="result"></h2>
+
 </div>
 
 <script>
-let balance=5000, level=1, jackpot=100000;
-let symbols=["🍒","💎","🔥","👑","🍀","7️⃣"];
+let balance = 1000;
+const symbols = ["🍒","💎","7️⃣","👑","🔥","⭐"];
 
 function spin(){
-  let bet=parseInt(document.getElementById("bet").value);
-  if(balance<bet||bet<50){alert("Saldo kurang atau bet terlalu kecil");return;}
-  balance-=bet;
-  updateUI();
 
-  let reels=["r1","r2","r3","r4","r5"];
-  reels.forEach(id=>document.getElementById(id).classList.add("spin"));
-
-  setTimeout(()=>{
-    let results=[];
-    reels.forEach(id=>{
-      document.getElementById(id).classList.remove("spin");
-      let s=symbols[Math.floor(Math.random()*symbols.length)];
-      document.getElementById(id).innerText=s;
-      results.push(s);
-    });
-    checkWin(results,bet);
-  },1000);
+let bet = parseInt(document.getElementById("bet").value);
+if(bet > balance){
+alert("Saldo tidak cukup!");
+return;
 }
 
-function checkWin(res,bet){
-  let counts={},maxv=0;
-  res.forEach(x=>{
-    counts[x]=(counts[x]||0)+1;
-    maxv=Math.max(maxv,counts[x]);
-  });
+balance -= bet;
 
-  if(maxv>=3){
-    let win=bet*maxv;
-    balance+=win;
-    document.getElementById("result").innerHTML="<span class='win'>🔥 WIN x"+maxv+" +"+win+"</span>";
-    if(maxv===5){
-      balance+=jackpot;
-      document.getElementById("result").innerHTML="<span class='win'>💎 MEGA JACKPOT +"+jackpot+"</span>";
-      jackpot=100000;
-    }
-  }else{
-    document.getElementById("result").innerText="Try Again!";
-  }
+let reels=[];
+let reelElements=[];
 
-  jackpot+=50;
-  updateUI();
+for(let i=1;i<=5;i++){
+let el=document.getElementById("r"+i);
+el.classList.add("spinning");
+reelElements.push(el);
 }
 
-function updateUI(){
-  document.getElementById("balance").innerText=balance;
-  document.getElementById("level").innerText=level;
-  document.getElementById("jackpot").innerText=jackpot;
+setTimeout(()=>{
+for(let i=1;i<=5;i++){
+let random = symbols[Math.floor(Math.random()*symbols.length)];
+document.getElementById("r"+i).innerText=random;
+reels.push(random);
+document.getElementById("r"+i).classList.remove("spinning");
+}
+
+let win=false;
+
+if(reels[0]===reels[1] && reels[1]===reels[2]){
+win=true;
+balance+=bet*5;
+}
+
+if(win){
+document.getElementById("result").innerText="🔥 BIG WIN 🔥";
+document.getElementById("result").classList.add("win");
+}else{
+document.getElementById("result").innerText="";
+document.getElementById("result").classList.remove("win");
+}
+
+document.getElementById("balance").innerText=balance;
+
+},800);
 }
 </script>
 
