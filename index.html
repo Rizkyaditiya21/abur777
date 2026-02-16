@@ -1,213 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ABUR777 Mega Spin</title>
+<title>Mahjong Slot Starter</title>
 
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family: 'Trebuchet MS', sans-serif;
-}
-
-body{
-background: radial-gradient(circle at center,#1a0033,#000);
-color:white;
-text-align:center;
-height:100vh;
-overflow:hidden;
-}
-
-/* HEADER */
-.header{
-padding:15px;
-font-size:22px;
-font-weight:bold;
-color:#ffcc00;
-text-shadow:0 0 20px #ffcc00;
-letter-spacing:2px;
-}
-
-/* SLOT FRAME */
-.frame{
-margin:10px auto;
-width:95%;
-max-width:450px;
-padding:20px;
-border-radius:20px;
-background:linear-gradient(145deg,#2d004d,#120022);
-box-shadow:0 0 30px #ff00ff inset, 0 0 40px #ff00ff;
-}
-
-/* REELS */
-.slot-container{
-display:flex;
-justify-content:center;
-gap:8px;
-margin:20px 0;
-}
-
-.reel{
-width:60px;
-height:90px;
-background:#000;
-border-radius:12px;
-border:2px solid #ffcc00;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:38px;
-box-shadow:0 0 15px #ffcc00 inset;
-transition:transform 0.1s;
-}
-
-/* SPIN ANIMATION */
-.spinning{
-animation: spinAnim 0.1s linear infinite;
-}
-
-@keyframes spinAnim{
-0%{transform:translateY(-5px);}
-50%{transform:translateY(5px);}
-100%{transform:translateY(-5px);}
-}
-
-/* CONTROLS */
-.controls{
-margin-top:10px;
-}
-
-input{
-width:80px;
-padding:6px;
-border-radius:8px;
-border:none;
-text-align:center;
-font-weight:bold;
-}
-
-button{
-margin-top:10px;
-padding:12px 30px;
-border:none;
-border-radius:12px;
-font-size:16px;
-font-weight:bold;
-background:linear-gradient(45deg,#ffcc00,#ff6600);
-color:black;
-box-shadow:0 0 20px #ffcc00;
-}
-
-button:active{
-transform:scale(0.95);
-}
-
-.balance{
-margin-top:10px;
-}
-
-.win{
-color:#00ffcc;
-text-shadow:0 0 20px #00ffcc;
-animation: glow 1s infinite alternate;
-}
-
-@keyframes glow{
-from{text-shadow:0 0 10px #00ffcc;}
-to{text-shadow:0 0 25px #00ffcc;}
-}
-
-@media(max-width:480px){
-.reel{
-width:55px;
-height:80px;
-font-size:34px;
-}
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="header">🎰 ABUR777 MEGA SPIN</div>
+<h1>🀄 Mahjong Slot Starter</h1>
 
-<div class="frame">
+<div id="grid"></div>
 
-<div class="balance">
-Balance: $<span id="balance">1000</span><br>
-Bet: <input type="number" id="bet" value="50" min="10">
-</div>
-
-<div class="slot-container">
-<div class="reel" id="r1">❓</div>
-<div class="reel" id="r2">❓</div>
-<div class="reel" id="r3">❓</div>
-<div class="reel" id="r4">❓</div>
-<div class="reel" id="r5">❓</div>
-</div>
-
-<div class="controls">
 <button onclick="spin()">SPIN</button>
-</div>
 
-<h2 id="result"></h2>
-
-</div>
-
-<script>
-let balance = 1000;
-const symbols = ["🍒","💎","7️⃣","👑","🔥","⭐"];
-
-function spin(){
-
-let bet = parseInt(document.getElementById("bet").value);
-if(bet > balance){
-alert("Saldo tidak cukup!");
-return;
-}
-
-balance -= bet;
-
-let reels=[];
-let reelElements=[];
-
-for(let i=1;i<=5;i++){
-let el=document.getElementById("r"+i);
-el.classList.add("spinning");
-reelElements.push(el);
-}
-
-setTimeout(()=>{
-for(let i=1;i<=5;i++){
-let random = symbols[Math.floor(Math.random()*symbols.length)];
-document.getElementById("r"+i).innerText=random;
-reels.push(random);
-document.getElementById("r"+i).classList.remove("spinning");
-}
-
-let win=false;
-
-if(reels[0]===reels[1] && reels[1]===reels[2]){
-win=true;
-balance+=bet*5;
-}
-
-if(win){
-document.getElementById("result").innerText="🔥 BIG WIN 🔥";
-document.getElementById("result").classList.add("win");
-}else{
-document.getElementById("result").innerText="";
-document.getElementById("result").classList.remove("win");
-}
-
-document.getElementById("balance").innerText=balance;
-
-},800);
-}
-</script>
+<script src="scripts/grid.js"></script>
+<script src="scripts/spin.js"></script>
+<script src="main.js"></script>
 
 </body>
 </html>
